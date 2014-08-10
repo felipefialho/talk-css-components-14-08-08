@@ -1,0 +1,34 @@
+
+.reveal h1 {
+  margin-bottom: 50px;
+}
+
+.reveal h2 {
+  line-height: 100px;
+}
+
+.reveal h3 {
+  line-height: 60px;
+}
+
+.reveal h3,
+.reveal h4,
+.reveal h5 {
+  margin-bottom: 30px;
+}
+
+.reveal hr {
+  margin: 30px 0;
+}
+
+.reveal b {
+  color: #d1644e;
+}
+
+
+.inverse > h1,
+.inverse > h2,
+.inverse > h3,
+.inverse > h4 {
+  color: #eee;
+}

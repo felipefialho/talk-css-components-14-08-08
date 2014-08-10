@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>O íncrivel CSS - CSSBR</title>
+
+		<meta name="description" content="Talk para o Meetup CSS do dia 08/08/2014 com o assunto 'É possível utilizar componentes desenvolvidos apenas com CSS?'">
+		<meta name="author" content="Luiz Felipe Tartarotti Fialho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/serif.css" id="theme">
+		<link rel="stylesheet" href="css/type.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>CSSBR - SP</h1>
+					<h2>O incrível CSS</h2>
+
+          <hr>
+
+          <img src="img/meetup.png" alt="CSSBr" style="border: 0; width: 20%">
+
+				</section>
+
+				<section>
+					<h2>Olá amigos!</h2>
+					<p>Sou Luiz Felipe Tartarotti Fialho, tenho 24 anos e trabalho como Desenvolvedor Front-End desde 2009.</p>
+
+					<hr>
+
+					<ul>
+						<li>Twitter: <a href="https://twitter.com/LFeh">@LFeh</a></li>
+						<li>Facebook: <a href="https://www.facebook.com/LFehh">https://www.facebook.com/LFehh</a></li>
+						<li>Github: <a href="https://github.com/LFeh/">https://github.com/LFeh/</a></li>
+					</ul>
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<a href="http://www.trendi.com.br/" target="_blank"><img src="img/trendi.jpg" alt="Trendi"></a>
+				</section>
+
+        <section>
+          <a href="http://codepen.io/LFeh/pen/qzDCJ" target="_blank">
+            <h2>Em 2012...</h2>
+            <img src="img/cartman.jpg" alt="Cartman">
+          </a>
+        </section>
+
+        <section>
+          <a href="http://www.felipefialho.com/piano/#.U9eM2uNdXHQ">
+            <h2>Um Piano...</h2>
+            <img src="img/piano.jpg" alt="Piano">
+            <p><small>(Em parceria com o Thiago Genuino)</small></p>
+          </a>
+          <aside class="notes">
+            Em parceria com o Thiago
+          </aside>
+        </section>
+
+        <section>
+          <a href="http://chessjs.trendi.com.br/chess/">
+            <h2>Um Xadrez...</h2>
+            <img src="img/chess.jpg" alt="Xadrez">
+            <p><small>(Em parceria com o Thiago Genuino)</small></p>
+          </a>
+          <aside class="notes">
+            Também em parceria com o Thiago
+          </aside>
+        </section>
+
+        <section>
+          <a href="http://www.felipefialho.com/css-components/">
+            <h2>E o CSS Components...</h2>
+            <img src="img/css-components.jpg" alt="CSS Components">
+          </a>
+        </section>
+
+				<section>
+					<h3>É possível utilizar componentes desenvolvidos apenas com CSS?</h3>
+				</section>
+
+        <section class="inverse" data-background="img/css-components-code.jpg">
+          <h2>Antes um pouco sobre código</h2>
+        </section>
+        <section>
+          <h4>Todas as interações foram desenvolvidas usando básicamente duas técnicas</h4>
+
+          <h3>:target</h3>
+          <pre><code data-trim>n:target</code></pre>
+
+          <h3>input[hidden]</h3>
+          <pre><code data-trim>< input type"radio/checkbox" hidden /></code></pre>
+          <hr>
+          <p>Através dessas técnicas conseguimos fornecer um estado para um elemento alvo. Ou seja, conseguimos trabalhar como eles vão se comportar quando estiverem "ativos".</p>
+        </section>
+
+        <section>
+          <section>
+            <h2>Sobre o :target</h2>
+          </section>
+          <section>
+            <p>Através do <b>:target</b> conseguimos adicionar interação em um elemento que possui o ID atrelado em algum <b>[href]</b>. Até um tempo atrás isso só era possível com Javascript.</p>
+          </section>
+          <section>
+
+            <h2>HTML</h2>
+<pre><code data-trim> <a href="#modal-one" class="btn">Example</a>
+
+<!-- Modal -->
+<div class="modal" id="modal-one" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      ...
+      <a class="btn-close" href="#" aria-hidden="true">×</a>
+    </div>
+    <div class="modal-body">
+      ...
+    </div>
+    <div class="modal-footer">
+      ...
+    </div>
+  </div>
+</div></code></pre>
+          </section>
+          <section>
+
+            <h2>CSS</h2>
+<pre><code data-trim> .modal {
+
+  &:before {
+    content: "";
+    display: none;
+    background: rgba(0,0,0,.6);
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1001;
+  }
+
+  .modal-dialog {
+    top: -100%;
+    .translate(-50%, -500%);
+    .transition-transform(~"0.3s ease-out");
+  }
+
+  &:target {
+
+    &:before {
+      display: block;
+    }
+
+    .modal-dialog {
+      .translate(0, 0);
+      top: 20%;
+    }
+  }
+
+}</code></pre>
+          <p><a href="http://www.felipefialho.com/css-components/#component-modal" target="_blank">Exemplo do Modal</a></p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Sobre o input[hidden]</h2>
+          </section>
+          <section>
+            <h4>É quase uma "gambiarra" :p</h4>
+
+            <p>Deixamos um <b>[checkbox]</b> ou <b>[radio]</b> escondido usando <b>[hidden]</b> e trocamos seu status usando um <b>label</b> (sempre fizemos isso nos formulários).</p>
+
+            <p>O truque é usar <b>~</b> para adicionar interações em elementos irmãos do <b>input</b>.</p>
+          </section>
+          <section>
+
+            <h2>HTML</h2>
+<pre><code data-trim><!-- Collapse -->
+<div class="collapse">
+  <label class="collapse-open" for="collapse-1">Botão maneiro</label>
+  <input class="collapse-open" type="checkbox" id="collapse-1" aria-hidden="true" hidden />
+  <div class="collapse-panel">
+    <div class="collapse-inner">
+      ...
+    </div>
+  </div>
+</div></code></pre>
+          </section>
+          <section>
+
+            <h2>CSS</h2>
+<pre><code data-trim>.collapse-panel {
+  display: none;
+}
+
+.collapse-open:checked ~ .collapse-panel {
+  display: block;
+}</code></pre>
+          <p><a href="http://www.felipefialho.com/css-components/#component-collapse" target="_blank">Exemplo de Collapse</a></p>
+          </section>
+        </section>
+        <section>
+          <h3>Essas técnicas funcionam no IE9+</h3>
+        </section>
+        <section>
+          <h3>Um pouco sobre <b>performance</b>...</h3>
+        </section>
+        <section>
+          <section>
+            <h2>Teste em um projeto real</h2>
+            <h3>Meu site pessoal...</h3>
+          </section>
+          <section>
+            <h3>Antes</h3>
+            <p>Um resultado de teste no <a href="http://gtmetrix.com/">GTMetrix</a> antes da alteração.</p>
+            <img src="img/gt-metrix-old.jpg" alt="Old">
+          </section>
+          <section>
+            <h3>O que foi feito?</h3>
+            <ol>
+                <li>Removi <b>todo</b> o Javascript do projeto</li>
+                <li>Passei a usar o CSS Componentes de <b>Modal</b> e <b>Collapse</b>.</li>
+            </ol>
+          </section>
+          <section>
+            <h3>Resultado</h3>
+            <img src="img/gt-metrix-new.jpg" alt="New">
+          </section>
+          <section>
+            <h3>Teste final</h3>
+            <ol>
+                <li>Otimizei o carregamento dos ícones e embedei CSS</li>
+                <li>Retirei a imagem de "Fork".</li>
+            </ol>
+          </section>
+          <section>
+            <h3>Resultado final</h3>
+            <img src="img/gt-metrix-plus.jpg" alt="Plus">
+          </section>
+          <section>
+            <h2>Consolidando</h2>
+          </section>
+          <section>
+            <h3>Com Javascript</h3>
+            <img src="img/gt-metrix-old.jpg" alt="Old">
+          </section>
+          <section>
+            <h3>Com CSS Components</h3>
+            <img src="img/gt-metrix-new.jpg" alt="New">
+          </section>
+          <section>
+            <h3>Com otimizações de ícones e imagens</h3>
+            <img src="img/gt-metrix-plus.jpg" alt="plus">
+          </section>
+          <section>
+            <h3>Ou seja...</h3>
+
+            <p>Aconteceu uma pequena melhora de performance ao usar <b>CSS Components</b>, mas ajustes que muitas vezes esquecemos de fazer, como diminuir requisições, podem causar um impacto muito maior na perfomance de um projeto.</p>
+          </section>
+        </section>
+
+        <section>
+          <h3>É possível utilizar componentes desenvolvidos apenas com CSS?</h3>
+        </section>
+
+        <section>
+          <h2>Obrigado! :D</h2>
+
+          <hr>
+
+          <ul>
+            <li>Twitter: <a href="https://twitter.com/LFeh">@LFeh</a></li>
+            <li>Facebook: <a href="https://www.facebook.com/LFehh">https://www.facebook.com/LFehh</a></li>
+            <li>Github: <a href="https://github.com/LFeh/">https://github.com/LFeh/</a></li>
+          </ul>
+
+          <hr>
+
+          <img src="img/meetup.png" alt="CSSBr" style="border: 0; width: 20%">
+
+        </section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
